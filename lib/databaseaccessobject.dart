@@ -20,4 +20,18 @@ class DataBaseAccessObjects {
     newInfos['contact_age'] = contact_age;
     await addPersonDAO.insert('contacts', newInfos);
   }
+
+  Future<void> deletePerson(int contact_id) async {
+    var deletePersonDAO = await DataBaseHelper.accessDataBase();
+    await deletePersonDAO
+        .delete('contacts', where: 'contact_id = ?', whereArgs: [contact_id]);
+  }
+
+  Future<void> updatePerson(int contact_id,String contact_name,int contact_age) async {
+    var updatePersonDAO = await DataBaseHelper.accessDataBase();
+    var newInfosForUpdate = Map<String,dynamic>();
+    newInfosForUpdate['contact_name'] = contact_name;
+    newInfosForUpdate['contact_age'] = contact_age;
+    await updatePersonDAO.update('contacts', newInfosForUpdate,where: 'contact_id = ?',whereArgs: [contact_id]);
+  }
 }
