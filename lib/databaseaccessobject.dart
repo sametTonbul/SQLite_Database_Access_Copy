@@ -27,11 +27,34 @@ class DataBaseAccessObjects {
         .delete('contacts', where: 'contact_id = ?', whereArgs: [contact_id]);
   }
 
-  Future<void> updatePerson(int contact_id,String contact_name,int contact_age) async {
+  Future<void> updatePerson(
+      int contact_id, String contact_name, int contact_age) async {
     var updatePersonDAO = await DataBaseHelper.accessDataBase();
-    var newInfosForUpdate = Map<String,dynamic>();
+    var newInfosForUpdate = Map<String, dynamic>();
     newInfosForUpdate['contact_name'] = contact_name;
     newInfosForUpdate['contact_age'] = contact_age;
-    await updatePersonDAO.update('contacts', newInfosForUpdate,where: 'contact_id = ?',whereArgs: [contact_id]);
+    await updatePersonDAO.update('contacts', newInfosForUpdate,
+        where: 'contact_id = ?', whereArgs: [contact_id]);
+  }
+
+  Future<int> checkPersonData(String contact_name) async {
+    var checkPersonDataDAO = await DataBaseHelper.accessDataBase();
+    List<Map<String, dynamic>> resultMap = await checkPersonDataDAO.rawQuery(
+        "SELECT count(*) AS result FROM contacts WHERE contact_name= '$contact_name' ");
+    var resultMapDefaultIndex = 0;
+    return resultMap[resultMapDefaultIndex]['result'];
+  }
+
+  Future<Contacts> getPerson(int contact_id) async {
+    var getPersonDAO = await DataBaseHelper.accessDataBase();
+    List<Map<String, dynamic>> resultGetPersonMap = await getPersonDAO
+        .rawQuery("SELECT * FROM contacts WHERE contact_id=$contact_id");
+    var getPersonMapDefaultIndex = 0;
+    var getPersonRow = resultGetPersonMap[getPersonMapDefaultIndex];
+    return Contacts(
+      getPersonRow['contact_id'],
+      getPersonRow['contact_name'],
+      getPersonRow['contact_age'],
+    );
   }
 }

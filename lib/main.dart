@@ -51,13 +51,30 @@ class _MyHomePageState extends State<MyHomePage> {
     await DataBaseAccessObjects().updatePerson(3, 'Messi', 45);
   }
 
+  Future<void> checkPersonDatas() async {
+    int result = await DataBaseAccessObjects().checkPersonData('Messi');
+    print('Database included : $result');
+  }
+
+  Future<void> getPersonForOne() async {
+    var person = await DataBaseAccessObjects().getPerson(2);
+      print('************');
+      print('Person ID: ${person.contact_id}');
+      print('************');
+      print('Person Name: ${person.contact_name}');
+      print('************');
+      print('Person Age: ${person.contact_age}');
+  }
+
 
   @override
   void initState() {
     super.initState();
     //addPerson();
     //deletePerson();
-    updatePerson();
+    //updatePerson();
+    //checkPersonDatas();
+    getPersonForOne();
     showContacts();
   }
 
