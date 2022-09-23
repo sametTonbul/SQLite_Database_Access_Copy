@@ -67,6 +67,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+Future<void> searchContact() async {
+    var list = await DataBaseAccessObjects().searchContact('s');
+    for (Contacts person in list) {
+      print('************');
+      print('Person ID: ${person.contact_id}');
+      print('************');
+      print('Person Name: ${person.contact_name}');
+      print('************');
+      print('Person Age: ${person.contact_age}');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -74,7 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
     //deletePerson();
     //updatePerson();
     //checkPersonDatas();
-    getPersonForOne();
+    //getPersonForOne();
+    searchContact();
     showContacts();
   }
 

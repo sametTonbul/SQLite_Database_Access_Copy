@@ -28,7 +28,7 @@ class DataBaseAccessObjects {
   }
 
   Future<void> updatePerson(
-      int contact_id, String contact_name, int contact_age) async {
+    int contact_id, String contact_name, int contact_age) async {
     var updatePersonDAO = await DataBaseHelper.accessDataBase();
     var newInfosForUpdate = Map<String, dynamic>();
     newInfosForUpdate['contact_name'] = contact_name;
@@ -56,5 +56,21 @@ class DataBaseAccessObjects {
       getPersonRow['contact_name'],
       getPersonRow['contact_age'],
     );
+  }
+
+  Future<List<Contacts>> searchContact(String searchName) async {
+    var searchPersonDAO = await DataBaseHelper.accessDataBase();
+
+    List<Map<String, dynamic>> resultSearchContactMap = await
+        searchPersonDAO.rawQuery(
+            "SELECT * FROM contacts WHERE contact_name like '%$searchName%' ");
+    return List.generate(resultSearchContactMap.length, (index) {
+      var searchNameRow = resultSearchContactMap[index];
+      return Contacts(
+        searchNameRow['contact_id'],
+        searchNameRow['contact_name'],
+        searchNameRow['contact_age'],
+      );
+    });
   }
 }
