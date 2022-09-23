@@ -39,9 +39,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> addPerson() async {
+    await DataBaseAccessObjects().addPerson('Cristiano', 38);
+  }
+
   @override
   void initState() {
     super.initState();
+    addPerson();
     showContacts();
   }
 

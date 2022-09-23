@@ -12,4 +12,12 @@ class DataBaseAccessObjects {
           dataRow['contact_age']);
     });
   }
+
+  Future<void> addPerson(String contact_name, int contact_age) async {
+    var addPersonDAO = await DataBaseHelper.accessDataBase();
+    var newInfos = Map<String, dynamic>();
+    newInfos['contact_name'] = contact_name;
+    newInfos['contact_age'] = contact_age;
+    await addPersonDAO.insert('contacts', newInfos);
+  }
 }
