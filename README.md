@@ -37,4 +37,12 @@ Data copy,access,add,delete and update operations in database with sqlite</h3>
 <p align="center">
   <img src="https://github.com/sametTonbul/SQLite_Database_Access_Copy/blob/master/uptadePerson2.jpg" width="1080" height="1080" />
   
+<h1 align="center">Data Search in database with sqlite via Flutter</h1> 
+              
+<p align="center">
+  <img src="https://github.com/sametTonbul/SQLite_Database_Access_Copy/blob/master/search.jpg" width="1080" height="1080" />
+  
+<p align="center">
+  <img src="https://github.com/sametTonbul/SQLite_Database_Access_Copy/blob/master/search2.jpg" width="1080" height="1080" />
+  
   
